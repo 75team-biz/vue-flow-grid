@@ -1,6 +1,6 @@
 {
   "name": "vue-flow-grid",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple flow grid component for Vue.js",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,5 @@
     "url": "https://github.com/75team-biz/vue-flow-grid/issues"
   },
   "homepage": "https://github.com/75team-biz/vue-flow-grid#readme",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
