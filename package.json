@@ -1,0 +1,25 @@
+{
+  "name": "vue-flow-grid",
+  "version": "0.0.0",
+  "description": "A simple flow grid component for Vue.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"TODO:test\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/75team-biz/vue-flow-grid.git"
+  },
+  "keywords": [
+    "vue",
+    "flow",
+    "grid",
+    "flowgrid"
+  ],
+  "author": "NangeGao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/75team-biz/vue-flow-grid/issues"
+  },
+  "homepage": "https://github.com/75team-biz/vue-flow-grid#readme"
+}
