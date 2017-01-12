@@ -4,8 +4,13 @@
 
   vFlowGrid.install = function (Vue, options) {
     Vue.directive('flowgrid', {
-        inserted: function (el, binding, vnode) {
+        componentUpdated: function (el, binding, vnode) {
             options = options || {}
+
+            //只运行一次
+            if (el.querySelector("#vFlowgrid1")) {
+                return;
+            }
 
             //瀑布流要展示的项目
             var items = [];
@@ -43,10 +48,10 @@
             //按顺序插入所有item
             for (var i=0; i<itemCount; i++) {
                 if (i<gridCount) {
-                    el.childNodes[i].appendChild(items[i].cloneNode(true));
+                    el.childNodes[i].appendChild(items[i]);
                 } else {
                     var appendGridIndex = getNextAppendGrid();
-                    el.childNodes[appendGridIndex].appendChild(items[i].cloneNode(true));
+                    el.childNodes[appendGridIndex].appendChild(items[i]);
                 }
             }
 
