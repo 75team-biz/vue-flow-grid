@@ -48,6 +48,7 @@ The code above will be transformed to:
     <i style="clear: both;"></i>
 </ul>
 ```
+
 ### TODO LIST
   - test
   - lazyload

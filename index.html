@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul v-flowgrid="colNum" style="width: 1000px;">
+        <li>
+          <div style="height: 300px;">1</div>
+        </li>
+        <li>
+          <div style="height: 500px;">2</div>
+        </li>
+        <li>
+          <div style="height: 600px;">3</div>
+        </li>
+        <li>
+          <div style="height: 400px;">4</div>
+        </li>
+        <li>
+          <div style="height: 250px;">5</div>
+        </li>
+        <li>
+          <div style="height: 102px;">6</div>
+        </li>
+        <li>
+          <div style="height: 330px;">7</div>
+        </li>
+        <li>
+          <div style="height: 1300px;">8</div>
+        </li>
+        <li>
+          <div style="height: 290px;">9</div>
+        </li>
+        <li>
+          <div style="height: 40px;">10</div>
+        </li>
+        <li>
+          <div style="height: 300px;">11</div>
+        </li>
+    </ul>
+  </div>
+
+  <script src="//lib.baomitu.com/vue/2.2.2/vue.js"></script>
+  <script src="./dist/index.js"></script>
+
+  <script>
+    const Vue = window.Vue;
+    Vue.use(window.FlowGrid);
+
+    const vm = new Vue({
+      el: '#app',
+      data() {
+        return {
+          colNum: 4
+        };
+      }
+    });
+    vm.$nextTick(() => {
+      console.log(document.getElementById('app').innerHTML);
+    });
+  </script>
+</body>
+
+</html>
