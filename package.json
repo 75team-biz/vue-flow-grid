@@ -1,10 +1,10 @@
 {
   "name": "vue-flow-grid",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "A simple flow grid component for Vue.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo -e '[TODO]Test coming soon...'"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,10 @@
     "url": "https://github.com/75team-biz/vue-flow-grid/issues"
   },
   "homepage": "https://github.com/75team-biz/vue-flow-grid#readme",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "jsdom": "^9.12.0",
+    "vue": "2.2.6"
+  }
 }
