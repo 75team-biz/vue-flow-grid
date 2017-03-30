@@ -46,25 +46,9 @@
     <button class="btn" @click="decrease">decrease colunm</button>
     <button class="btn" @click="add">add new grid</button>
     <button class="btn" @click="remove">remove new grid</button>
+    <button class="btn" @click="reset">reset grids</button>
     <div v-flowgrid="colNum" class="grid-con">
-        <div>
-          <div style="height: 100px;">1</div>
-        </div>
-        <div>
-          <div style="height: 200px;">2</div>
-        </div>
-        <div>
-          <div style="height: 120px;">3</div>
-        </div>
-        <div>
-          <div style="height: 230px;">4</div>
-        </div>
-        <div>
-          <div style="height: 250px;">5</div>
-        </div>
-        <div>
-        
-        <div v-for="(item, index) in extraGrids">
+        <div v-for="(item, index) in grids">
           <div :style="{height: item + 'px'}">extra-{{index}}</div>
         </div>
         
@@ -83,7 +67,7 @@
       data() {
         return {
           colNum: 4,
-          extraGrids: []
+          grids: Array.from({ length: 5}, _ => 200 + 300 * Math.random())
         };
       },
       methods: {
@@ -96,10 +80,13 @@
           }
         },
         add() {
-          this.extraGrids.push(1000 * Math.random());
+          this.grids.push(1000 * Math.random());
         },
         remove() {
-          this.extraGrids.pop();
+          this.grids.pop();
+        },
+        reset() {
+          this.grids = Array.from({ length: 5}, _ => 200 + 300 * Math.random());
         }
       }
     });
