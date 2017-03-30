@@ -3,46 +3,72 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>vue-flow-grid</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      bottom: 0;
+    }
+    
+    #app {
+      margin: 50px auto;
+    }
+
+    .grid-con > div > div {
+      margin: 10px;
+    }
+    
+    .grid-con > div > div > div {
+      font-size: 16px;
+      text-align: center;
+      line-height: 2;
+      background-color: #22e8dd;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: salmon;
+      padding: 10px;
+      margin-bottom: 20px;
+      margin-left: 20px;
+      cursor: pointer;
+      border: none;
+      box-shadow: none;
+      color: #fff;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="app">
-    <ul v-flowgrid="colNum" style="width: 1000px;">
-        <li>
-          <div style="height: 300px;">1</div>
-        </li>
-        <li>
-          <div style="height: 500px;">2</div>
-        </li>
-        <li>
-          <div style="height: 600px;">3</div>
-        </li>
-        <li>
-          <div style="height: 400px;">4</div>
-        </li>
-        <li>
+  <div id="app" style="width: 1000px;">
+    <button class="btn" @click="increase">increase colunm</button>
+    <button class="btn" @click="decrease">decrease colunm</button>
+    <button class="btn" @click="add">add new grid</button>
+    <button class="btn" @click="remove">remove new grid</button>
+    <div v-flowgrid="colNum" class="grid-con">
+        <div>
+          <div style="height: 100px;">1</div>
+        </div>
+        <div>
+          <div style="height: 200px;">2</div>
+        </div>
+        <div>
+          <div style="height: 120px;">3</div>
+        </div>
+        <div>
+          <div style="height: 230px;">4</div>
+        </div>
+        <div>
           <div style="height: 250px;">5</div>
-        </li>
-        <li>
-          <div style="height: 102px;">6</div>
-        </li>
-        <li>
-          <div style="height: 330px;">7</div>
-        </li>
-        <li>
-          <div style="height: 1300px;">8</div>
-        </li>
-        <li>
-          <div style="height: 290px;">9</div>
-        </li>
-        <li>
-          <div style="height: 40px;">10</div>
-        </li>
-        <li>
-          <div style="height: 300px;">11</div>
-        </li>
-    </ul>
+        </div>
+        <div>
+        
+        <div v-for="(item, index) in extraGrids">
+          <div :style="{height: item + 'px'}">extra-{{index}}</div>
+        </div>
+        
+    </div>
   </div>
 
   <script src="//lib.baomitu.com/vue/2.2.2/vue.js"></script>
@@ -56,12 +82,26 @@
       el: '#app',
       data() {
         return {
-          colNum: 4
+          colNum: 4,
+          extraGrids: []
         };
+      },
+      methods: {
+        increase() {
+          this.colNum += 1;
+        },
+        decrease() {
+          if (this.colNum > 1) {
+            this.colNum -= 1;
+          }
+        },
+        add() {
+          this.extraGrids.push(1000 * Math.random());
+        },
+        remove() {
+          this.extraGrids.pop();
+        }
       }
-    });
-    vm.$nextTick(() => {
-      console.log(document.getElementById('app').innerHTML);
     });
   </script>
 </body>
