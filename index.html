@@ -67,7 +67,7 @@
       data() {
         return {
           colNum: 4,
-          grids: Array.from({ length: 5}, _ => 200 + 300 * Math.random())
+          grids: Array.from({ length: 5}, _ => 100 + 300 * Math.random())
         };
       },
       methods: {
@@ -80,13 +80,13 @@
           }
         },
         add() {
-          this.grids.push(1000 * Math.random());
+          this.grids.push(100 + 300 * Math.random());
         },
         remove() {
           this.grids.pop();
         },
         reset() {
-          this.grids = Array.from({ length: 5}, _ => 200 + 300 * Math.random());
+          this.grids = Array.from({ length: 5}, _ => 100 + 300 * Math.random());
         }
       }
     });
