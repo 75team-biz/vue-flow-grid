@@ -1,3 +1,5 @@
+import deepDiff from 'deep-diff';
+
 export default {
     version: '1.0.0',
     install: installVFlowGrid
@@ -12,14 +14,17 @@ const shouldUpdate = (el, binding, vnode, oldVnode) => {
     const attr = +binding.value;
 
     if (isNaN(attr) || attr <= 0 || Math.round(attr) !== attr) {
-        console.warn('the value `v-flow-grid` must be a positive number');
+        console.warn('the value `v-flow-grid` must be a positive integer');
         return false;
     }
 
-    const initialized     = () => !!el.getAttribute(INIT_FLAG);
-    const bindingChanged  = () => attr !== binding.oldValue;
-    const childrenChanged = () => vnode.children.length !== oldVnode.children.length;
-    return !initialized() || bindingChanged() || childrenChanged();
+    // initializing, or attr changes
+    if (!el.getAttribute(INIT_FLAG) || attr !== binding.oldValue) {
+        return true;
+    }
+
+    const diff = deepDiff(vnode.children, oldVnode.children);
+    return !!(diff && diff.length);
 };
 
 /**
@@ -51,8 +56,17 @@ const clearfix = (el) => {
 };
 
 function installVFlowGrid(Vue, options) {
+    const checkUpdate = function (el, binding, vnode, oldVnode) {
+        // avoid unneccesary updates
+        if (shouldUpdate(el, binding, vnode, oldVnode)) {
+            Vue.nextTick(() => {
+                reflow(el, binding, vnode, oldVnode);
+            });
+        }
+    };
+
     Vue.directive('flowgrid', {
-        inserted: function (el, binding, vnode, oldVnode) {
+        inserted(el, binding, vnode, oldVnode) {
             /**
              * hide each item as soon as they are inserted
              * to avoid flash of content.
@@ -65,18 +79,13 @@ function installVFlowGrid(Vue, options) {
             });
 
             // do reflow
-            reflow(el, binding, vnode, oldVnode);
+            checkUpdate(el, binding, vnode, oldVnode);
         },
-        componentUpdated: reflow
+        componentUpdated: checkUpdate
     });
 }
 
 function reflow(el, binding, vnode, oldVnode) {
-    // avoid unneccesary updates
-    if (!shouldUpdate(el, binding, vnode, oldVnode)) {
-        return;
-    }
-
     // grids
     const items = vnode.children.reduce((accu, item) => {
         if (!!item.tag) {
@@ -90,7 +99,7 @@ function reflow(el, binding, vnode, oldVnode) {
     }
 
     // colums
-    const colNum  = Math.min(binding.value, items.length);
+    const colNum  = binding.value;
     const columns = Array.from({ length: colNum }, () => {
         const col = document.createElement('div');
         col.style.width = `${100 / colNum}%`;
@@ -105,11 +114,15 @@ function reflow(el, binding, vnode, oldVnode) {
     Array.from(el.children).map(item => el.removeChild(item));
 
     // append col to element
-    columns.map(c => el.appendChild(c));
+    columns.forEach(c => el.appendChild(c));
 
     // start to append items
     items.forEach((item, i) => {
         columns[i < colNum ? i : getAppendCol(columns)].appendChild(item);
+    });
+
+    // show items at one time
+    items.forEach(item => {
         item.style && (item.style.visibility = 'visible');
     });
 

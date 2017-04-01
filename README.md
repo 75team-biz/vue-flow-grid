@@ -5,12 +5,16 @@ A simple flow grid component for Vue.js.
 ## How to use
 
 ### Install
-    npm install vue-flow-grid
 
-### import
-    import Vue from 'vue'
-    import FlowGrid from 'vue-flow-grid'
+`npm install vue-flow-grid`
+
+### Import
+
+```js
+    import Vue from 'vue';
+    import FlowGrid from 'vue-flow-grid';
     Vue.use(FlowGrid);
+```
 
 ### Example
 
@@ -49,16 +53,6 @@ The code above will be transformed to:
 </ul>
 ```
 
-### Existing Issue
-
-If grid count does not change (yet data actually changes), cols will not update.
-
-This could blame on performance.
-
-Better solution is under consideration.
-
 ### TODO LIST
 
-- test
-
-- lazyload
+- test cases
