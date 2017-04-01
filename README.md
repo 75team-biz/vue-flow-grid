@@ -49,6 +49,16 @@ The code above will be transformed to:
 </ul>
 ```
 
+### Existing Issue
+
+If grid count does not change (yet data actually changes), cols will not update.
+
+This could blame on performance.
+
+Better solution is under consideration.
+
 ### TODO LIST
-  - test
-  - lazyload
+
+- test
+
+- lazyload
