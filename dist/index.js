@@ -484,6 +484,7 @@ var getAppendCol = function (columns) {
 var clearfix = function (el) {
     var cf = document.createElement('i');
     var style = cf.style;
+    style.display = 'block';
     style.clear = 'both';
     style.visibility = 'hidden';
     style.width = 0;
