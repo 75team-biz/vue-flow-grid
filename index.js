@@ -48,6 +48,7 @@ const getAppendCol = function (columns) {
 const clearfix = (el) => {
     const cf = document.createElement('i');
     const style = cf.style;
+    style.display = 'block';
     style.clear = 'both';
     style.visibility = 'hidden';
     style.width = 0;
